@@ -26,7 +26,7 @@ func (server *Server) setupRoutes() {
 	logger.Log.Info("Setting up routes")
 	api := server.router.Group("/api")
 	{
-		api.GET("/items", server.getItemsHandler)
+		api.POST("/scan/:scan_type", server.getItemsHandler)
 	}
 }
 

