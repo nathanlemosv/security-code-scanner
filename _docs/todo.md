@@ -2,14 +2,15 @@
 
 ## Backend Setup (Golang)
 - [x] Setup Golang server
-- [x] Define API contract for security scanner endpoints
 - [x] Implement API REST layer
-- [ ] Create file system scanning functionality
+- [x] Define API contract for security scanner endpoints
+- [x] Create file scanning functionality
 - [ ] Implement security check engine with pluggable architecture
 - [ ] Add Cross Site Scripting (XSS) checker - detect `Alert()` in HTML/JS files
 - [ ] Add SQL Injection checker - detect quoted strings with SELECT, WHERE, %s patterns
 - [ ] Create scan configuration parameter handling
 - [ ] Implement scan results data structure and API response
+- [ ] Optimize file scanning functionality
 
 ## Frontend Setup (React)
 - [ ] Setup React application

@@ -3,11 +3,23 @@ package rest
 import (
 	"github.com/gin-gonic/gin"
 	"server/logger"
-	"server/scan"
 )
 
 type Server struct {
 	router *gin.Engine
+}
+
+type Item struct {
+	ID     string  `json:"id"`
+	Name   string  `json:"name"`
+	Price  float64 `json:"price"`
+	Status bool    `json:"status"`
+}
+
+var Items = []Item{
+	{ID: "1", Name: "Item 1", Price: 19.99, Status: true},
+	{ID: "2", Name: "Item 2", Price: 29.99, Status: false},
+	{ID: "3", Name: "Item 3", Price: 39.99, Status: true},
 }
 
 func Start(port string) {
@@ -31,9 +43,9 @@ func (server *Server) setupRoutes() {
 }
 
 func (server *Server) getItemsHandler(c *gin.Context) {
-	logger.Log.Info("Getting items", "count", len(scan.Items))
+	logger.Log.Info("Getting items", "count", len(Items))
 	c.JSON(200, gin.H{
-		"items": scan.Items,
-		"total": len(scan.Items),
+		"items": Items,
+		"total": len(Items),
 	})
 }
