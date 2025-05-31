@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Scan Occurrences",
+  "description": "Array of pattern occurrences found during security scanning",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "pattern": {
+        "type": "string",
+        "description": "The detected pattern or keyword",
+        "minLength": 1
+      },
+      "position": {
+        "type": "integer",
+        "description": "Character position in the entire text/file",
+        "minimum": 0
+      },
+      "line": {
+        "type": "integer",
+        "description": "Line number where the pattern was found",
+        "minimum": 1
+      },
+      "column": {
+        "type": "integer",
+        "description": "Column number where the pattern starts",
+        "minimum": 1
+      }
+    },
+    "required": ["pattern", "position", "line", "column"],
+    "additionalProperties": false
+  }
+}
