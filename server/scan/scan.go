@@ -3,12 +3,13 @@ package scan
 import "strings"
 
 type Occurrence struct {
-	Pattern  string
-	Position int
-	Line     int
-	Column   int
+	Pattern  string `json:"pattern"`
+	Position int    `json:"position"`
+	Line     int    `json:"line"`
+	Column   int    `json:"column"`
 }
 
+// TODO: optimize
 func Process(file []byte, patterns []string) []Occurrence {
 	var occurrences []Occurrence
 	fileStr := strings.ToLower(string(file))

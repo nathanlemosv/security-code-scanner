@@ -2,24 +2,14 @@ package rest
 
 import (
 	"github.com/gin-gonic/gin"
+	"io"
+	"net/http"
 	"server/logger"
+	"server/scan"
 )
 
 type Server struct {
 	router *gin.Engine
-}
-
-type Item struct {
-	ID     string  `json:"id"`
-	Name   string  `json:"name"`
-	Price  float64 `json:"price"`
-	Status bool    `json:"status"`
-}
-
-var Items = []Item{
-	{ID: "1", Name: "Item 1", Price: 19.99, Status: true},
-	{ID: "2", Name: "Item 2", Price: 29.99, Status: false},
-	{ID: "3", Name: "Item 3", Price: 39.99, Status: true},
 }
 
 func Start(port string) {
@@ -38,14 +28,51 @@ func (server *Server) setupRoutes() {
 	logger.Log.Info("Setting up routes")
 	api := server.router.Group("/api")
 	{
-		api.POST("/scan/:scan_type", server.getItemsHandler)
+		api.POST("/scan/:scanType", server.handler)
 	}
 }
 
-func (server *Server) getItemsHandler(c *gin.Context) {
-	logger.Log.Info("Getting items", "count", len(Items))
-	c.JSON(200, gin.H{
-		"items": Items,
-		"total": len(Items),
-	})
+func (server *Server) handler(c *gin.Context) {
+	fileContent, err := extractFileContent(c)
+	if err != nil {
+		logger.Log.Error("Error extracting file content", "error", err)
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+	occurrences, err := scan.Handle(c.Param("scanType"), fileContent)
+	if err != nil {
+		logger.Log.Error("Error scanning file content", "error", err)
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+	c.JSON(http.StatusOK, occurrences)
+}
+
+func extractFileContent(c *gin.Context) ([]byte, error) {
+	form, err := c.MultipartForm()
+	if err != nil {
+		logger.Log.Error("Error extracting form", "error", err)
+		return []byte{}, err
+	}
+	var firstKey string
+	for key := range form.File {
+		firstKey = key
+		break
+	}
+	fileHeader := form.File[firstKey]
+	file, err := fileHeader[0].Open()
+	if err != nil {
+		logger.Log.Error("Error opening file", "error", err)
+		return []byte{}, err
+	}
+	content, err := io.ReadAll(file)
+	if err != nil {
+		logger.Log.Error("Error reading file", "error", err)
+		return []byte{}, err
+	}
+	return content, nil
 }
