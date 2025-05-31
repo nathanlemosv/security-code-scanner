@@ -1,7 +1,7 @@
 # Project Todo List
 
 ## Backend Setup (Golang)
-- [ ] Setup Golang server
+- [x] Setup Golang server
 - [ ] Define API contract for security scanner endpoints
 - [ ] Implement API REST layer
 - [ ] Create file system scanning functionality
