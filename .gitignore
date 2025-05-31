@@ -1,2 +1,5 @@
 .idea
+.DS_Store
+_docs/.DS_Store
 client/node_modules
+

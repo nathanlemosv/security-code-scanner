@@ -13,13 +13,12 @@
 
 ## Frontend Setup (React)
 - [x] Setup React application
-- [ ] Create path input component for source code location
-- [ ] Build scan configuration UI (parameters input)
+- [x] Create path input component for source code location
 - [ ] Design and implement findings display component
+- [ ] Build scan configuration UI (parameters input)
 - [ ] Add scan trigger functionality
 - [ ] Implement results visualization/listing
-- [ ] Add loading states and error handling
-- [ ] Style the security scanner interface
+- [ ] Style the security code scanner interface
 
 ## Security Checks Implementation
 - [ ] **XSS Detection**: Scan HTML and JavaScript files for `Alert()` statements
