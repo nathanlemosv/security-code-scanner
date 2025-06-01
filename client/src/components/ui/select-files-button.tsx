@@ -1,7 +1,7 @@
 import * as React from "react";
-import { useRef } from 'react';
 import { Button, type ButtonProps } from '@chakra-ui/react';
 import type {Scan} from "../types/scan.ts";
+import {useColorModeValue} from "./color-mode.tsx";
 
 
 interface SelectFilesButtonProps extends Omit<ButtonProps, 'onClick'> {
@@ -11,7 +11,7 @@ interface SelectFilesButtonProps extends Omit<ButtonProps, 'onClick'> {
 const SelectFilesToScanButton = ({
                                onFilesSelected
                            }: SelectFilesButtonProps) => {
-    const fileInputRef = useRef<HTMLInputElement>(null);
+    const fileInputRef = React.useRef<HTMLInputElement>(null);
     const handleButtonClick = () => {
         fileInputRef.current?.click();
     };
@@ -30,7 +30,8 @@ const SelectFilesToScanButton = ({
                 onChange={handleFileChange}
             />
             <Button
-                onClick={handleButtonClick}>
+                onClick={handleButtonClick}
+                color={useColorModeValue("black", "white")}>
                 Select Files
             </Button>
         </>

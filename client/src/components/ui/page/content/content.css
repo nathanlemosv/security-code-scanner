@@ -4,8 +4,22 @@
 .actions {
     display: flex;
     flex-direction: row;
+    padding-top: 2rem;
+    justify-content: space-between;
 }
 
 .select-files-input {
     display: none;
 }
+
+.occurrences {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.no-occurrences {
+    width: 25px;
+    height: 25px;
+}
+

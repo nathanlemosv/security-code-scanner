@@ -9,7 +9,7 @@
 - [x] Add Cross Site Scripting (XSS) checker - detect `Alert()` in files
 - [x] Add SQL Injection checker - detect quoted strings with SELECT, WHERE, %s patterns
 - [x] Implement scan results data structure and API response
-- [ ] Optimize file scanning functionality
+- [x] Optimize file scanning functionality
 
 ## Frontend Setup (React)
 - [x] Setup React application
@@ -17,18 +17,17 @@
 - [x] Design and implement findings display component
 - [x] Build scan configuration UI
 - [x] Add scan trigger functionality
-- [ ] Implement results visualization/listing
+- [x] Implement results visualization/listing
 - [ ] Style the security code scanner interface
 
 ## Security Checks Implementation
-- [ ] **XSS Detection**: Scan HTML and JavaScript files for `Alert()` statements
-- [ ] **SQL Injection Detection**: Find statements like `"... SELECT ... WHERE ... %s ..."`
-- [ ] Design extensible architecture for adding new security checks
-- [ ] Add file type filtering for relevant checks
+- [x] **XSS Detection**: Scan HTML and JavaScript files for `Alert()` statements
+- [x] **SQL Injection Detection**: Find statements like `"... SELECT ... WHERE ... %s ..."`
+- [x] Design extensible architecture for adding new security checks
 
 ## Testing & Validation
-- [ ] Create test files with known vulnerabilities
-- [ ] Test XSS detection with sample HTML/JS files
-- [ ] Test SQL injection detection with sample code
-- [ ] Validate scan configuration parameters
-- [ ] Test end-to-end scanning workflow
+- [x] Create test files with known vulnerabilities
+- [x] Test XSS detection with sample HTML/JS files
+- [x] Test SQL injection detection with sample code
+- [x] Validate scan configuration parameters
+- [x] Test end-to-end scanning workflow

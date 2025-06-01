@@ -1,4 +1,4 @@
 {
   "sqli": ["select","where", "%s"],
-  "xss": [".alert("]
+  "xss": ["alert("]
 }

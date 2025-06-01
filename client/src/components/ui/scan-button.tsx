@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Button, VStack, Spinner } from '@chakra-ui/react';
 import type { Scan } from "../types/scan.ts";
 import { ProcessScanService } from "../services/process-scan.service.ts";
+import {useColorModeValue} from "./color-mode.tsx";
 
 interface ScanButtonProps {
     scanConfig: string
@@ -29,7 +30,8 @@ const ScanButton = ({ scanConfig, scans, onScanComplete }: ScanButtonProps) => {
     return (
         <VStack align="start">
             <Button
-                onClick={handleScan}>
+                onClick={handleScan}
+                color={useColorModeValue("black", "white")}>
                 {loading ? <Spinner size="sm" mr={2}/> : null}
                 {loading ? 'Scanning...' : 'Scan'}
             </Button>
