@@ -9,7 +9,7 @@ var testFileContent []byte
 
 func TestMain(m *testing.M) {
 	var err error
-	testFileContent, err = os.ReadFile("../../_docs/files/example-1.txt")
+	testFileContent, err = os.ReadFile("../../_docs/files/example-2.html")
 	if err != nil {
 		panic("Fail to upload file: " + err.Error())
 	}
