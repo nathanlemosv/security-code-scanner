@@ -9,7 +9,7 @@ export class ProcessScanService {
         formData.append(scan.file.name, scan.file);
         try {
             const response = await axios.post(`${this.BASE_URL}/${config}`, formData);
-            response.data.forEach((result: any) => console.log(result))
+            scan.occurrences = response.data;
             return scan
         } catch (error) {
             throw new Error(`Fail to scan file: ${error}`);
