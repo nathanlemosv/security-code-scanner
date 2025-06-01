@@ -4,13 +4,13 @@ import { Button, type ButtonProps } from '@chakra-ui/react';
 import type {Scan} from "../types/scan.ts";
 
 
-interface ImportFilesButtonProps extends Omit<ButtonProps, 'onClick'> {
+interface SelectFilesButtonProps extends Omit<ButtonProps, 'onClick'> {
     onFilesSelected: (scans: Scan[]) => void
 }
 
 const SelectFilesToScanButton = ({
                                onFilesSelected
-                           }: ImportFilesButtonProps) => {
+                           }: SelectFilesButtonProps) => {
     const fileInputRef = useRef<HTMLInputElement>(null);
     const handleButtonClick = () => {
         fileInputRef.current?.click();
@@ -18,11 +18,12 @@ const SelectFilesToScanButton = ({
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (!event.target.files) return
         const files: File[] = Array.from(event.target.files)
-        onFilesSelected(files.map(file => ({file, type: "full" })));
+        onFilesSelected(files.map(file => ({file})));
     };
     return (
         <>
             <input
+                className="select-files-input"
                 ref={fileInputRef}
                 type="file"
                 multiple={true}

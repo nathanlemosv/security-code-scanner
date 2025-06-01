@@ -6,16 +6,16 @@
 - [x] Define API contract for security scanner endpoints
 - [x] Create file scanning functionality
 - [x] Implement security check engine with pluggable architecture
-- [x] Add Cross Site Scripting (XSS) checker - detect `Alert()` in HTML/JS files
+- [x] Add Cross Site Scripting (XSS) checker - detect `Alert()` in files
 - [x] Add SQL Injection checker - detect quoted strings with SELECT, WHERE, %s patterns
 - [x] Implement scan results data structure and API response
 - [ ] Optimize file scanning functionality
 
 ## Frontend Setup (React)
 - [x] Setup React application
-- [x] Create path input component for source code location
-- [ ] Design and implement findings display component
-- [ ] Build scan configuration UI (parameters input)
+- [x] Create input component for source code
+- [x] Design and implement findings display component
+- [x] Build scan configuration UI
 - [ ] Add scan trigger functionality
 - [ ] Implement results visualization/listing
 - [ ] Style the security code scanner interface

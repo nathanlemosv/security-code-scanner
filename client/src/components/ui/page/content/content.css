@@ -2,5 +2,10 @@
 .items {}
 
 .actions {
+    display: flex;
+    flex-direction: row;
+}
 
+.select-files-input {
+    display: none;
 }
