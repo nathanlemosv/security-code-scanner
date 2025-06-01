@@ -16,7 +16,7 @@
 - [x] Create input component for source code
 - [x] Design and implement findings display component
 - [x] Build scan configuration UI
-- [ ] Add scan trigger functionality
+- [x] Add scan trigger functionality
 - [ ] Implement results visualization/listing
 - [ ] Style the security code scanner interface
 

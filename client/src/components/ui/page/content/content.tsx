@@ -4,14 +4,19 @@ import type { Scan } from "../../../types/scan.ts";
 import SelectFilesToScanButton from "../../select-files-button.tsx";
 import ScanTable from "../../scan-table.tsx";
 import ScanConfigSelect from "../../scan-config-select.tsx";
+import ScanButton from "../../scan-button.tsx";
 
 function Content() {
     const [selectedFilesToScan, setSelectedFilesToScan] = useState<Scan[]>([]);
+    const [selectedConfig, setSelectedConfig] = useState<string>('full');
     const handleFilesChange = (scan: Scan[]) => {
         setSelectedFilesToScan(scan);
     }
     const handleConfigChange = (config: string) => {
-        console.log('config:', config)
+        setSelectedConfig(config);
+    }
+    const handleScanComplete = (updatedScans: Scan[]) => {
+        setSelectedFilesToScan(updatedScans);
     }
     return (
         <div className="content">
@@ -21,6 +26,7 @@ function Content() {
             <div className="actions">
                 <SelectFilesToScanButton onFilesSelected={ handleFilesChange }/>
                 <ScanConfigSelect onConfigSelected={ handleConfigChange }></ScanConfigSelect>
+                <ScanButton scanConfig={ selectedConfig } scans={ selectedFilesToScan } onScanComplete={ handleScanComplete }/>
             </div>
         </div>
     )

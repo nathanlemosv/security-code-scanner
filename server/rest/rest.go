@@ -28,28 +28,39 @@ func (server *Server) setupRoutes() {
 	logger.Log.Info("Setting up routes")
 	api := server.router.Group("/api")
 	{
-		api.POST("/scan/:scanType", server.handler)
+		api.POST("/scan/:scanType", handler)
 	}
 }
 
-func (server *Server) handler(c *gin.Context) {
-	fileContent, err := extractFileContent(c)
+func handler(context *gin.Context) {
+	configCORS(context)
+	fileContent, err := extractFileContent(context)
 	if err != nil {
 		logger.Log.Error("Error extracting file content", "error", err)
-		c.JSON(http.StatusInternalServerError, gin.H{
+		context.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
 		})
 		return
 	}
-	occurrences, err := scan.Handle(c.Param("scanType"), fileContent)
+	occurrences, err := scan.Handle(context.Param("scanType"), fileContent)
 	if err != nil {
 		logger.Log.Error("Error scanning file content", "error", err)
-		c.JSON(http.StatusInternalServerError, gin.H{
+		context.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
 		})
 		return
 	}
-	c.JSON(http.StatusOK, occurrences)
+	context.JSON(http.StatusOK, occurrences)
+}
+
+func configCORS(context *gin.Context) {
+	context.Header("Access-Control-Allow-Origin", "http://localhost:5173")
+	context.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+	context.Header("Access-Control-Allow-Headers", "Content-Type, Authorization")
+	if context.Request.Method == "OPTIONS" {
+		context.Status(http.StatusOK)
+		return
+	}
 }
 
 func extractFileContent(c *gin.Context) ([]byte, error) {
@@ -64,7 +75,7 @@ func extractFileContent(c *gin.Context) ([]byte, error) {
 		break
 	}
 	fileHeader := form.File[firstKey]
-	file, err := fileHeader[0].Open()
+	file, err := fileHeader[0].Open() // TODO: magic number
 	if err != nil {
 		logger.Log.Error("Error opening file", "error", err)
 		return []byte{}, err
