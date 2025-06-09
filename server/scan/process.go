@@ -14,7 +14,7 @@ type Chunk struct {
 	Offset int
 }
 
-func processInParallel(file []byte, patterns []string) []Occurrence {
+func process(file []byte, patterns []string) []Occurrence {
 	numWorkers := runtime.NumCPU()
 	maxPatternLen := 0
 	for _, pattern := range patterns {

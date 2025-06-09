@@ -8,7 +8,7 @@ type Occurrence struct {
 }
 
 func Process(file []byte, patterns []string) []Occurrence {
-	return processInParallel(file, patterns)
+	return process(file, patterns)
 }
 
 func getLineColumn(file []byte, position int) (int, int) {
